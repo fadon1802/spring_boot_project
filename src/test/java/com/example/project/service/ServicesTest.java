@@ -33,7 +33,7 @@ class ServicesTest {
 
     @Test
     public void testInterfaces() {
-        workerService.worker1.doWork();
-        workerService.worker2.doWork();
+        workerService.getWorker1().doWork();
+        workerService.getWorker2().doWork();
     }
 }
