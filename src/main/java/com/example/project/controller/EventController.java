@@ -1,11 +1,14 @@
 package com.example.project.controller;
 
+import com.example.project.dto.EventDto;
 import com.example.project.service.event.publishers.AsyncEventPublisher;
 import com.example.project.service.event.publishers.CustomEventPublisher;
 import com.example.project.service.event.publishers.TransactionalEventPublisher;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @AllArgsConstructor
@@ -15,10 +18,10 @@ public class EventController {
     private final TransactionalEventPublisher transactionalEventPublisher;
 
     @GetMapping("/publish")
-    public String publishEvents() {
-        customEventPublisher.publishCustomEvent("custom event 1");
-        asyncEventPublisher.publishAsyncEvent("async event 1");
-        return "Events published";
+    public List<EventDto> publishEvents() {
+        var customEvent = customEventPublisher.publishCustomEvent("custom event 1");
+        var asyncEvent = asyncEventPublisher.publishAsyncEvent("async event 1");
+        return List.of(new EventDto(customEvent.getMessage(), customEvent.getSource().toString()), new EventDto(asyncEvent.getMessage(), asyncEvent.getSource().toString()));
     }
 
     @GetMapping("/publishTransactional")

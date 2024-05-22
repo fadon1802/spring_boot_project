@@ -1,6 +1,6 @@
 package com.example.project.service.event.publishers;
 
-import com.example.project.event.TransactionalEvent;
+import com.example.project.event.AsyncEvent;
 import lombok.AllArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.context.ApplicationEventPublisher;
@@ -13,8 +13,10 @@ public class AsyncEventPublisher {
 
     final ApplicationEventPublisher applicationEventPublisher;
 
-    public void publishAsyncEvent(final String message) {
+    public AsyncEvent publishAsyncEvent(final String message) {
         log.info("Publishing async event: " + message);
-        applicationEventPublisher.publishEvent(new TransactionalEvent(this, message));
+        var event = new AsyncEvent(this, message);
+        applicationEventPublisher.publishEvent(event);
+        return event;
     }
 }
