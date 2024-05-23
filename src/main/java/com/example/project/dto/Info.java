@@ -1,14 +1,13 @@
 package com.example.project.dto;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
 
 @Setter
 @Getter
-@AllArgsConstructor(access=AccessLevel.PUBLIC)
+@AllArgsConstructor
 public class Info {
-    private int id;
+    private long id;
     private String date;
 }

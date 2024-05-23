@@ -1,18 +1,19 @@
 package com.example.project.adapter.web;
 
 import com.example.project.dto.JsonDto;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 @RestController
 public class JSONController {
-    private static int id;
+    private static final AtomicLong longId = new AtomicLong();
 
     @PostMapping("/addId")
-    public ResponseEntity<JsonDto> addIdtoJSON(@RequestBody JsonDto inputObj) {
-        inputObj.getInfo().setId(id++);
-        return ResponseEntity.ok().body(inputObj);
+    public JsonDto addIdToJSON(@RequestBody JsonDto inputObj) {
+        inputObj.getInfo().setId(longId.getAndIncrement());
+        return inputObj;
     }
 }
