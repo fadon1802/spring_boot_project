@@ -2,16 +2,16 @@ package com.example.project.controllers;
 
 import com.example.project.model.Notebook;
 import com.example.project.service.NotebookService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
+@AllArgsConstructor
 @RequestMapping("/api/notebooks")
 public class NotebookController {
 
-    @Autowired
     private NotebookService notebookService;
 
     @GetMapping
