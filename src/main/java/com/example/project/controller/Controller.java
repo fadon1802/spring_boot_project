@@ -1,13 +1,11 @@
 package com.example.project.controller;
 
 import com.example.project.aspect.APIMethod;
+import com.example.project.dto.Response;
 import com.example.project.error.RequestsLimitException;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @Log4j2
@@ -15,13 +13,14 @@ public class Controller {
 
     @APIMethod
     @GetMapping("/aspects")
-    public ResponseEntity<String> limitedApi() {
-        return ResponseEntity.ok().body("okay");
+    public Response limitedApi() {
+        return new Response("okay");
     }
 
     @ExceptionHandler(RequestsLimitException.class)
-    public ResponseEntity<String> handleRequestLimitExceededException(RequestsLimitException ex) {
-        return ResponseEntity.status(HttpStatus.TOO_MANY_REQUESTS).body(ex.getMessage());
+    @ResponseStatus(HttpStatus.TOO_MANY_REQUESTS)
+    public Response handleRequestLimitExceededException(RequestsLimitException ex) {
+        return new Response(ex.getMessage());
     }
 
 }
