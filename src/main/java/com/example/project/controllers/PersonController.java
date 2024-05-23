@@ -17,10 +17,9 @@ import java.util.UUID;
 public class PersonController {
 
     @PostMapping("/person")
-    public ResponseEntity<PersonDto> postPerson(@RequestBody @Valid PersonDto person) {
+    public PersonDto postPerson(@RequestBody @Valid PersonDto person) {
         String id = UUID.randomUUID().toString();
-        var newPerson = new PersonDto(id, person.getName());
-        return ResponseEntity.ok().body(newPerson);
+        return new PersonDto(id, person.getName());
     }
 
     @ExceptionHandler(BindException.class)

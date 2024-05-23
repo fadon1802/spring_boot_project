@@ -1,20 +1,20 @@
 package com.example.project.dto;
 
 import com.example.project.validation.annotations.Name;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.FieldDefaults;
 
 @Getter
+@AllArgsConstructor
+@FieldDefaults(level = AccessLevel.PRIVATE)
 public final class PersonDto {
 
     @Setter
-    private String id;
+    String id;
 
     @Name
-    private final String name;
-    public PersonDto(String id, String name) {
-        this.id = id;
-        this.name = name;
-    }
-
+    final String name;
 }
