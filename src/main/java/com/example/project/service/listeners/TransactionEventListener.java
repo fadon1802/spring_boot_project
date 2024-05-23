@@ -12,11 +12,11 @@ public class TransactionEventListener {
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_COMMIT)
     public void handleAfterCommit(TransactionalEvent event) {
-        log.info("Transactional event commit: " + event.getMessage());
+        log.info("Transactional event commit: {}", event.getMessage());
     }
 
     @TransactionalEventListener(phase = TransactionPhase.AFTER_ROLLBACK)
     public void handleAfterRollback(TransactionalEvent event) {
-        log.info("Transactional event rollback: " + event.getMessage());
+        log.info("Transactional event rollback: {}", event.getMessage());
     }
 }

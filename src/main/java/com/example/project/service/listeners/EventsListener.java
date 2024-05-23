@@ -13,12 +13,12 @@ public class EventsListener {
 
     @EventListener
     public void onCustomEvent(CustomEvent event) {
-        log.info("Handled custom event: " + event.getMessage());
+        log.info("Handled custom event: {}", event.getMessage());
     }
 
     @Async
     @EventListener
     public void onAsyncEvent(AsyncEvent event) {
-        log.info("Handled async event: " + event.getMessage());
+        log.info("Handled async event: {}", event.getMessage());
     }
 }
